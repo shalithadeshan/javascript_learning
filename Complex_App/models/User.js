@@ -1,4 +1,6 @@
+const usersCollection = require('../db')
 const validator = require('validator')
+
 
 let User = function(data) {
     // this.homePlannet = "earth" // add property to User object
@@ -58,6 +60,11 @@ User.prototype.register = function() {
         // validate user data
         this.cleanUp()
         this.validate()
+
+        // save data if no errors
+        if (!this.errors.length) {
+            usersCollection.insertOne(this.data1)
+        }
     } // implement function to User
 
 module.exports = User

@@ -13,4 +13,6 @@ app.set('view engine', 'ejs') // set UI view file
 
 app.use('/', router) // use rouer.js file
 
-app.listen(3000) // port number loachost:3000
+// app.listen(3000) // port number loachost:3000
+
+module.exports = app // export file
