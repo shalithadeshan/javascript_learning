@@ -67,14 +67,18 @@ User.prototype.register = function() {
         }
     } // implement function to User
 
-User.prototype.login = function(callback) {
-    this.cleanUp()
-    usersCollection.findOne({ username: this.data1.username }, (err, attemptedUser) => {
-        if (attemptedUser && attemptedUser.password == this.data1.password) {
-            callback("yeeee")
-        } else {
-            callback("invalid")
-        }
+User.prototype.login = function() {
+    return new Promise((resolve, reject) => {
+        this.cleanUp()
+        usersCollection.findOne({ username: this.data1.username }).then((attemptedUser) => {
+            if (attemptedUser && attemptedUser.password == this.data1.password) {
+                resolve("yeeee")
+            } else {
+                reject("invalid")
+            }
+        }).catch(function() {
+            reject("Please try again later")
+        })
     })
 }
 
